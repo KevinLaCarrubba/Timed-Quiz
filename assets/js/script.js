@@ -64,17 +64,7 @@ var startBtnEl = document.querySelector("#start-button");
 
 var time = 121;
 var pointDeduction = 10;
-//Create a function to end the timer
-function endTimer() {
-  if (time === 0)
-    //hide the timer
-    timerEL.style.display = "none";
-  //clear the timer
-  time = 0;
-  quizDisplay.style.display = "none";
-  //Link to high score page for user name input
-  window.open("highscores.html");
-}
+
 //Create function to start the timer
 
 //Extract set interval so that is global so it can be started or updated.
@@ -83,11 +73,23 @@ function startTimer() {
     time--;
     timerEL.textContent = time + " seconds left";
 
-    if (time === 0) {
+    if (time <= 0) {
       clearInterval(timerInterval);
       endTimer();
     }
   }, 1000);
+}
+
+//Create a function to end the timer
+function endTimer() {
+  if (time <= 0)
+    //hide the timer
+    timerEL.style.display = "none";
+  //clear the timer
+  time = 0;
+  quizDisplay.style.display = "none";
+  //Link to high score page for user name input
+  window.open("highscores.html");
 }
 //Create a function to start the quiz.
 function startQuiz() {
@@ -106,7 +108,15 @@ function renderQuiz() {
   questions.forEach((item, key) => {
     //Create variable for question container
     var questionContainer = document.createElement("div");
+    //dynamically determine wether the question should be shown or not on load
+    var questionDisplayClass = "";
+    if (key === 0) {
+      questionDisplayClass = "show";
+    } else {
+      questionDisplayClass = "hide";
+    }
     questionContainer.classList.add("questionContainer");
+    questionContainer.classList.add(questionDisplayClass);
     // While inside the loop. create the div for the question.
     var question = document.createElement("div");
     question.classList.add("question");
@@ -142,14 +152,13 @@ function checkAnswer(event) {
   var currentOption = event.target.value;
   //get the correct object out of the questions array
   var currentQuestion = questions[currentQuestionIndex];
-  // debugger;
   console.log(currentOption);
   console.log(currentQuestion.answer);
-
+  console.log(currentQuestionIndex);
   //compare the current option to the currentQuestion.answer
+  debugger;
   if (currentOption === currentQuestion.answer) {
     console.log("correct");
-    console.log(currentQuestionIndex);
     //grab the current question index as well as the answer options and hide it
 
     //grab the next question and answer options and display it
@@ -164,6 +173,5 @@ function checkAnswer(event) {
   return;
 }
 
-//Create Function to End timer
 //Create function to calculate score
 //Add high score to high score page

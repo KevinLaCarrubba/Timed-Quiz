@@ -71,3 +71,11 @@ button:hover {
 .highScoreButtons button {
   display: inline-block;
 }
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
