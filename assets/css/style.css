@@ -19,6 +19,13 @@ header {
   align-items: baseline;
 }
 
+a {
+  text-decoration: none;
+  color: red;
+}
+a:hover {
+  color: darkred;
+}
 .timer {
   display: flex;
   font-size: 30px;
@@ -48,4 +55,19 @@ button {
 button:hover {
   background-color: blue;
   color: white;
+}
+
+.highscore-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.highScoreButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.highScoreButtons button {
+  display: inline-block;
 }

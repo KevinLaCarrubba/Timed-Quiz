@@ -64,6 +64,17 @@ var startBtnEl = document.querySelector("#start-button");
 
 var time = 121;
 var pointDeduction = 10;
+//Create a function to end the timer
+function endTimer() {
+  if (time === 0)
+    //hide the timer
+    timerEL.style.display = "none";
+  //clear the timer
+  time = 0;
+  quizDisplay.style.display = "none";
+  //Link to high score page for user name input
+  window.open("highscores.html");
+}
 //Create function to start the timer
 
 //Extract set interval so that is global so it can be started or updated.
@@ -74,6 +85,7 @@ function startTimer() {
 
     if (time === 0) {
       clearInterval(timerInterval);
+      endTimer();
     }
   }, 1000);
 }
@@ -133,17 +145,20 @@ function checkAnswer(event) {
   // debugger;
   console.log(currentOption);
   console.log(currentQuestion.answer);
-  console.log(currentQuestionIndex);
+
   //compare the current option to the currentQuestion.answer
   if (currentOption === currentQuestion.answer) {
-    //grab the current question and hide
-    //grab the next question and diplay it
+    console.log("correct");
+    console.log(currentQuestionIndex);
+    //grab the current question index as well as the answer options and hide it
+
+    //grab the next question and answer options and display it
     return;
   }
   //if currentOption !== currentQuestion.answer
-  if (currentOption !== currentQuestion.answer)
-    //take the current time and subtract the pointDeduction from it
-    time = time - pointDeduction;
+  if (currentOption !== currentQuestion.answer) console.log("wrong");
+  //take the current time and subtract the pointDeduction from it
+  time = time - pointDeduction;
   //get the current question and hide it
   //grab the next question and display it
   return;
