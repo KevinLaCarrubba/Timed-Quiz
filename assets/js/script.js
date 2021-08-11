@@ -62,37 +62,33 @@ var questions = [
 var timerEL = document.querySelector(".timer");
 var startBtnEl = document.querySelector("#start-button");
 
-var timeLeft = 120;
+var time = 121;
 var pointDeduction = 10;
 //Create function to start the timer
 
 //Extract set interval so that is global so it can be started or updated.
 function startTimer() {
   var timerInterval = setInterval(function () {
-    timeLeft--;
-    timerEL.textContent = timeLeft + " seconds left";
+    time--;
+    timerEL.textContent = time + " seconds left";
 
-    if (timeLeft === 0) {
+    if (time === 0) {
       clearInterval(timerInterval);
     }
   }, 1000);
 }
-//Create Function To Check Answers
-//If right go to next question
-//If wrong pointDeduction
-//Create Function to End timer
-//Create function to calculate score
-//Add high score to high score page
-
 //Create a function to start the quiz.
 function startQuiz() {
   document.getElementById("start-button").style.display = "none";
+  document.getElementById("rules").style.display = "none";
   startTimer();
+  renderQuiz();
 }
 
 startBtnEl.addEventListener("click", startQuiz);
 var quizDisplay = document.querySelector(".quiz-box");
 function renderQuiz() {
+  quizDisplay.style.display = "block";
   //Loop through array of obj.
   questions.forEach((item, key) => {
     //Create variable for question container
@@ -112,7 +108,7 @@ function renderQuiz() {
       element.textContent = option;
       //Identifier to let you know what question youre on
       element.dataset.question = key;
-      //Indentifier to let you know what answer was clicked
+      //Identifier to let you know what answer was clicked
       element.setAttribute("value", option);
       element.addEventListener("click", checkAnswer);
       answers.appendChild(element);
@@ -124,12 +120,13 @@ function renderQuiz() {
   });
 
   // While inside the loop. create the div for the question.
-  //create the div for the options
+  //create the div for the answer options
 }
 //Grab quiz-box when the document starts
-window.addEventListener("load", renderQuiz);
+// window.addEventListener("load", renderQuiz);
 //Add an onclick function
 
+//Create Function To Check Answers
 function checkAnswer(event) {
   //check the data set question
   var currentQuestionIndex = event.target.dataset.question;
@@ -137,15 +134,25 @@ function checkAnswer(event) {
   var currentOption = event.target.value;
   //get the correct object out of the questions array
   var currentQuestion = questions[currentQuestionIndex];
+  debugger;
+  console.log(currentOption);
+  console.log(currentQuestion.answer);
+  console.log(currentQuestionIndex);
   //compare the current option to the currentQuestion.answer
   if (currentOption === currentQuestion.answer) {
-    //hide current question
-    //show next question
-    //return out
+    //grab the current question and hide
+    //grab the next question and diplay it
+    return;
   }
   //if currentOption !== currentQuestion.answer
-  //deduct points
-  //hide current question
-  //show next question
-  //return out
+  if (currentOption !== currentQuestion.answer)
+    //take the current time and subtract the pointDeduction from it
+    time = time - pointDeduction;
+  //get the current question and hide it
+  //grab the next question and display it
+  return;
 }
+
+//Create Function to End timer
+//Create function to calculate score
+//Add high score to high score page
