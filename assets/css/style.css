@@ -16,6 +16,7 @@ body {
 header {
   display: flex;
   justify-content: space-between;
+  align-items: baseline;
 }
 
 .timer {
@@ -29,4 +30,22 @@ header {
 hr {
   border-top: 3px double;
   color: blue;
+}
+
+button {
+  text-align: center;
+  width: 90px;
+  height: min-content;
+  display: block;
+  font-size: 12px;
+  border-radius: 8px;
+  background-color: white;
+  color: red;
+  border: 2px solid blue;
+  transition-duration: 0.2s;
+}
+
+button:hover {
+  background-color: blue;
+  color: white;
 }

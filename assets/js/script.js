@@ -88,13 +88,14 @@ function startQuiz() {
 startBtnEl.addEventListener("click", startQuiz);
 var quizDisplay = document.querySelector(".quiz-box");
 function renderQuiz() {
+  //display the hidden quiz
   quizDisplay.style.display = "block";
   //Loop through array of obj.
   questions.forEach((item, key) => {
     //Create variable for question container
     var questionContainer = document.createElement("div");
     questionContainer.classList.add("questionContainer");
-    //Create variable for the question
+    // While inside the loop. create the div for the question.
     var question = document.createElement("div");
     question.classList.add("question");
     question.textContent = item.question;
@@ -103,6 +104,7 @@ function renderQuiz() {
     answers.classList.add("answers");
     //Loop through options array in item to make answer options
     item.options.forEach((option) => {
+      //create the button for the answer options
       var element = document.createElement("button");
       element.classList.add("option");
       element.textContent = option;
@@ -118,13 +120,7 @@ function renderQuiz() {
     questionContainer.appendChild(answers);
     quizDisplay.appendChild(questionContainer);
   });
-
-  // While inside the loop. create the div for the question.
-  //create the div for the answer options
 }
-//Grab quiz-box when the document starts
-// window.addEventListener("load", renderQuiz);
-//Add an onclick function
 
 //Create Function To Check Answers
 function checkAnswer(event) {
@@ -134,7 +130,7 @@ function checkAnswer(event) {
   var currentOption = event.target.value;
   //get the correct object out of the questions array
   var currentQuestion = questions[currentQuestionIndex];
-  debugger;
+  // debugger;
   console.log(currentOption);
   console.log(currentQuestion.answer);
   console.log(currentQuestionIndex);
