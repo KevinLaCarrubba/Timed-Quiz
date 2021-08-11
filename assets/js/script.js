@@ -82,14 +82,13 @@ function startTimer() {
 
 //Create a function to end the timer
 function endTimer() {
-  if (time <= 0)
-    //hide the timer
-    timerEL.style.display = "none";
+  timerEL.style.display = "none";
   //clear the timer
-  time = 0;
   quizDisplay.style.display = "none";
+  //Call calculate highscore function
+  calculateScore();
   //Link to high score page for user name input
-  window.open("highscores.html");
+  // window.open("highscores.html");
 }
 //Create a function to start the quiz.
 function startQuiz() {
@@ -117,6 +116,7 @@ function renderQuiz() {
     }
     questionContainer.classList.add("questionContainer");
     questionContainer.classList.add(questionDisplayClass);
+    questionContainer.setAttribute("id", "question" + key);
     // While inside the loop. create the div for the question.
     var question = document.createElement("div");
     question.classList.add("question");
@@ -143,11 +143,12 @@ function renderQuiz() {
     quizDisplay.appendChild(questionContainer);
   });
 }
-
+//create a variable to keep track hom many questions are right using boolean values
+var answerStats = [];
 //Create Function To Check Answers
 function checkAnswer(event) {
   //check the data set question
-  var currentQuestionIndex = event.target.dataset.question;
+  var currentQuestionIndex = parseInt(event.target.dataset.question);
   //check the option
   var currentOption = event.target.value;
   //get the correct object out of the questions array
@@ -156,22 +157,61 @@ function checkAnswer(event) {
   console.log(currentQuestion.answer);
   console.log(currentQuestionIndex);
   //compare the current option to the currentQuestion.answer
-  debugger;
-  if (currentOption === currentQuestion.answer) {
-    console.log("correct");
-    //grab the current question index as well as the answer options and hide it
 
+  if (currentOption === currentQuestion.answer) {
+    answerStats.push(true);
+    //if we are on the last question go to highscores
+    console.log(answerStats);
+    if (currentQuestionIndex === 9) {
+      console.log(questions.length);
+      endTimer();
+      return;
+    }
+    //grab the current question index as well as the answer options and hide it
+    var currentDisplayQuestion = document.getElementById(
+      "question" + currentQuestionIndex
+    );
+    currentDisplayQuestion.classList.remove("show");
+    currentDisplayQuestion.classList.add("hide");
     //grab the next question and answer options and display it
+
+    var nextQuestionIndex = currentQuestionIndex + 1;
+    var nextDisplayQuestion = document.getElementById(
+      "question" + nextQuestionIndex
+    );
+    nextDisplayQuestion.classList.remove("hide");
+    nextDisplayQuestion.classList.add("show");
+
     return;
   }
-  //if currentOption !== currentQuestion.answer
-  if (currentOption !== currentQuestion.answer) console.log("wrong");
+  if (currentQuestionIndex === 9) {
+    console.log(questions.length);
+    endTimer();
+    return;
+  }
+
   //take the current time and subtract the pointDeduction from it
   time = time - pointDeduction;
-  //get the current question and hide it
-  //grab the next question and display it
+  var currentDisplayQuestion = document.getElementById(
+    "question" + currentQuestionIndex
+  );
+  currentDisplayQuestion.classList.remove("show");
+  currentDisplayQuestion.classList.add("hide");
+  //grab the next question and answer options and display it
+
+  var nextQuestionIndex = parseInt(currentQuestionIndex) + 1;
+  var nextDisplayQuestion = document.getElementById(
+    "question" + nextQuestionIndex
+  );
+  nextDisplayQuestion.classList.remove("hide");
+  nextDisplayQuestion.classList.add("show");
   return;
 }
-
+console.log(answerStats);
 //Create function to calculate score
-//Add high score to high score page
+function calculateScore() {
+  var totalScore = time + answerStats.length;
+  console.log(totalScore);
+  localStorage.setItem("Total Score", totalScore);
+  return totalScore;
+}
