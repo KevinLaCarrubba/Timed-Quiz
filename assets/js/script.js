@@ -257,10 +257,12 @@ function displayScore() {
 }
 
 function inputUserName() {
+  event.preventDefault();
   newScore.name = document.querySelector("#user-name").value;
   //dont allow user to enter a blank name
   formDisplay.style.display = "none";
   getStoredInfo();
+  return false;
 }
 
 submitButton.addEventListener("click", inputUserName);
@@ -289,4 +291,4 @@ function viewHighScores() {
   });
 }
 
-seeScoreList.addEventListener("click", viewHighScores);
+seeScoreList.addEventListener("clickbutt", viewHighScores);
