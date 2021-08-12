@@ -260,7 +260,12 @@ function inputUserName() {
   event.preventDefault();
   newScore.name = document.querySelector("#user-name").value;
   //dont allow user to enter a blank name
+  if (newScore.name === "") {
+    alert("you must enter a value");
+    return;
+  }
   formDisplay.style.display = "none";
+  seeScoreList.style.display = "none";
   getStoredInfo();
   return false;
 }
