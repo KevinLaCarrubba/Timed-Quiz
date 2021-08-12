@@ -17,7 +17,7 @@
           6
           class="logo"
         />
-        <a href="highscores.html" class="highScoreLink">Highscores</a>
+        <h6 id="high-score-link">Highscores</h6>
       </div>
       <div><h6 class="timer"></h6></div>
     </header>
@@ -47,6 +47,21 @@
     </section>
     <section>
       <div class="quiz-box" style="display: none"></div>
+    </section>
+    <form method="POST" id="form-input" style="display: none">
+      <label for="name">Name</label>
+      <input type="text" name="name" id="user-name" placeholder="Enter Name" />
+      <button id="submit">Submit</button>
+    </form>
+    <section id="high-score-page" style="display: none">
+      <h3 class="highscore-header">Highscores</h3>
+      <div>
+        <ul class="high-scores" id="high-scores-list"></ul>
+      </div>
+      <div class="highScoreButtons">
+        <button id="clear">Clear</button>
+        <button id="homePage">Home</button>
+      </div>
     </section>
   </body>
   <script src="./assets/js/script.js"></script>

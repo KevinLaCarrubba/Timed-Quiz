@@ -88,7 +88,7 @@ function endTimer() {
   //Call calculate highscore function
   calculateScore();
   //Link to high score page for user name input
-  window.open("highscores.html");
+  // window.open("highscores.html");
 }
 //Create a function to start the quiz.
 function startQuiz() {
@@ -211,7 +211,75 @@ function checkAnswer(event) {
 //Create function to calculate score
 function calculateScore() {
   var totalScore = time + answerStats.length;
-
-  localStorage.setItem("TotalScore", totalScore);
-  return totalScore;
+  newScore.score = totalScore;
+  // localStorage.setItem("TotalScore", totalScore);
+  formDisplay.style.display = "inline-block";
 }
+//=============================================
+//After Quiz is completed
+//=============================================
+var formDisplay = document.getElementById("form-input");
+var submitButton = document.querySelector("#submit");
+var displayHighScore = document.getElementById("high-score-page");
+var listHighScore = document.getElementById("high-scores-list");
+var clearButton = document.getElementById("clear");
+var homeButton = document.getElementById("homePage");
+var seeScoreList = document.getElementById("high-score-link");
+
+var newScore = { name: [], score: [] };
+var oldScore = JSON.parse(localStorage.getItem("oldScore")) || [];
+//create a function to open home page
+function goHomePage() {
+  window.open("index.html");
+}
+//add eventlistner on homebutton click
+homeButton.addEventListener("click", goHomePage);
+
+//create a function to clear local storage
+function clearStorage() {
+  localStorage.clear();
+}
+//add eventlistener on clear button click
+clearButton.addEventListener("click", clearStorage);
+
+function displayScore() {
+  displayHighScore.style.display = "block";
+  console.log(oldScore);
+  oldScore.forEach((item) => {
+    var scoreContainer = document.createElement("div");
+    scoreContainer.classList.add("scoreContainer");
+    var nameLine = document.createElement("li");
+    console.log(item.name);
+    nameLine.textContent =
+      "Username:  " + item.name + "    Score:  " + item.score;
+    scoreContainer.appendChild(nameLine);
+    listHighScore.appendChild(scoreContainer);
+  });
+}
+
+function inputUserName() {
+  newScore.name = document.querySelector("#user-name").value;
+  //dont allow user to enter a blank name
+  debugger;
+  formDisplay.style.display = "none";
+  getStoredInfo();
+}
+
+submitButton.addEventListener("click", inputUserName);
+
+function getStoredInfo() {
+  oldScore.push(newScore);
+  localStorage.setItem("oldScore", JSON.stringify(oldScore));
+  displayScore();
+}
+
+function viewHighScores() {
+  quizDisplay.style.display = "none";
+  document.getElementById("start-button").style.display = "none";
+  document.getElementById("rules").style.display = "none";
+  displayHighScore.style.display = "block";
+  listHighScore.style.display = "inline-block";
+  return;
+}
+
+seeScoreList.addEventListener("click", viewHighScores);

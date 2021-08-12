@@ -44,4 +44,40 @@ function getUserInput() {
 //add event listener to submit button
 submitButton.addEventListener("click", getUserInput);
 
-function renderHighScore() {}
+function renderHighScore() {
+  //remove the hide class from displayHighScore
+  displayHighScore.classList.remove("hide");
+  //set it to display in inline block
+  displayHighScore.style.display = "inline=block";
+  //loop through object
+  objectArray.forEach((item, key) => {
+    var divAdd = document.createElement("div");
+    divAdd.classList.add("line" + key);
+    //loop through names
+    item.namesArray.forEach((name) => {
+      //create li
+      var nameLi = document.createElement("li");
+      //add class for css
+      nameLi.classList.add("nameLi");
+      //fill with the name
+      nameLi.textContent = name;
+      //append to the div
+      nameLi.appendChild(divAdd);
+      //append the div to the high score list
+      divAdd.appendChild(listHighScore);
+    });
+    //loop through score
+    item.scoreArray.forEach((score) => {
+      //create li
+      var scoreLi = document.createElement("li");
+      //add class for css
+      scoreLi.classList.add("scoreLi");
+      //fill with the name
+      scoreLi.textContent = score;
+      //append to the div
+      scoreLi.appendChild(divAdd);
+      //append the div to the high score list
+      divAdd.appendChild(listHighScore);
+    });
+  });
+}

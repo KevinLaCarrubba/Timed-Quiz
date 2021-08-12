@@ -19,11 +19,12 @@ header {
   align-items: baseline;
 }
 
-a {
+#high-score-link {
   text-decoration: none;
   color: red;
 }
-a:hover {
+#high-score-link:hover {
+  cursor: pointer;
   color: darkred;
 }
 .timer {
@@ -63,6 +64,12 @@ button:hover {
   align-items: center;
 }
 
+.high-scores {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .highScoreButtons {
   display: flex;
   justify-content: center;
@@ -81,5 +88,8 @@ button:hover {
 }
 
 #high-scores-list {
-  display: inline;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
 }
