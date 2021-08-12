@@ -87,8 +87,6 @@ function endTimer() {
   quizDisplay.style.display = "none";
   //Call calculate highscore function
   calculateScore();
-  //Link to high score page for user name input
-  // window.open("highscores.html");
 }
 //Create a function to start the quiz.
 function startQuiz() {
@@ -230,7 +228,7 @@ var newScore = { name: [], score: [] };
 var oldScore = JSON.parse(localStorage.getItem("oldScore")) || [];
 //create a function to open home page
 function goHomePage() {
-  window.open("index.html");
+  window.location.reload();
 }
 //add eventlistner on homebutton click
 homeButton.addEventListener("click", goHomePage);
@@ -238,6 +236,7 @@ homeButton.addEventListener("click", goHomePage);
 //create a function to clear local storage
 function clearStorage() {
   localStorage.clear();
+  window.location.reload();
 }
 //add eventlistener on clear button click
 clearButton.addEventListener("click", clearStorage);
@@ -260,7 +259,6 @@ function displayScore() {
 function inputUserName() {
   newScore.name = document.querySelector("#user-name").value;
   //dont allow user to enter a blank name
-  debugger;
   formDisplay.style.display = "none";
   getStoredInfo();
 }
@@ -278,8 +276,17 @@ function viewHighScores() {
   document.getElementById("start-button").style.display = "none";
   document.getElementById("rules").style.display = "none";
   displayHighScore.style.display = "block";
-  listHighScore.style.display = "inline-block";
-  return;
+  listHighScore.style.display = "flex";
+  oldScore.forEach((item) => {
+    var scoreContainer = document.createElement("div");
+    scoreContainer.classList.add("scoreContainer");
+    var nameLine = document.createElement("li");
+    console.log(item.name);
+    nameLine.textContent =
+      "Username:  " + item.name + "    Score:  " + item.score;
+    scoreContainer.appendChild(nameLine);
+    listHighScore.appendChild(scoreContainer);
+  });
 }
 
 seeScoreList.addEventListener("click", viewHighScores);
