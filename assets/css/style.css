@@ -79,3 +79,7 @@ button:hover {
 .hide {
   display: none;
 }
+
+#high-scores-list {
+  display: inline;
+}

@@ -19,10 +19,15 @@
       <a href="index.html">HomePage</a>
     </header>
     <div><hr /></div>
-    <section>
+    <form method="POST" id="form-input">
+      <label for="name">Name</label>
+      <input type="text" name="name" id="user-name" placeholder="Enter Name" />
+      <button id="submit">Submit</button>
+    </form>
+    <section class="hide" id="high-score-page">
       <h3 class="highscore-header">Highscores</h3>
       <div>
-        <ol class="high-scores" id="high-scores-list"></ol>
+        <ul class="high-scores" id="high-scores-list"></ul>
       </div>
       <div class="highScoreButtons">
         <button id="clear">Clear</button>
@@ -30,5 +35,5 @@
       </div>
     </section>
   </body>
-  <script src="./assets/js/highscore.js"></script>
+  <script src="./assets/js/highscores.js"></script>
 </html>

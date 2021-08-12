@@ -88,7 +88,7 @@ function endTimer() {
   //Call calculate highscore function
   calculateScore();
   //Link to high score page for user name input
-  // window.open("highscores.html");
+  window.open("highscores.html");
 }
 //Create a function to start the quiz.
 function startQuiz() {
@@ -207,11 +207,11 @@ function checkAnswer(event) {
   nextDisplayQuestion.classList.add("show");
   return;
 }
-console.log(answerStats);
+// console.log(answerStats);
 //Create function to calculate score
 function calculateScore() {
   var totalScore = time + answerStats.length;
-  console.log(totalScore);
-  localStorage.setItem("Total Score", totalScore);
+
+  localStorage.setItem("TotalScore", totalScore);
   return totalScore;
 }
