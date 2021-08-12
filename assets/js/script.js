@@ -275,20 +275,21 @@ function getStoredInfo() {
 
 function viewHighScores() {
   quizDisplay.style.display = "none";
+  seeScoreList.style.display = "none";
   document.getElementById("start-button").style.display = "none";
   document.getElementById("rules").style.display = "none";
   displayHighScore.style.display = "block";
   listHighScore.style.display = "flex";
-  // oldScore.forEach((item) => {
-  //   var scoreContainer = document.createElement("div");
-  //   scoreContainer.classList.add("scoreContainer");
-  //   var nameLine = document.createElement("li");
-  //   console.log(item.name);
-  //   nameLine.textContent =
-  //     "Username:  " + item.name + "    Score:  " + item.score;
-  //   scoreContainer.appendChild(nameLine);
-  //   listHighScore.appendChild(scoreContainer);
-  // });
+  oldScore.forEach((item) => {
+    var scoreContainer = document.createElement("div");
+    scoreContainer.classList.add("scoreContainer");
+    var nameLine = document.createElement("li");
+    console.log(item.name);
+    nameLine.textContent =
+      "Username:  " + item.name + "    Score:  " + item.score;
+    scoreContainer.appendChild(nameLine);
+    listHighScore.appendChild(scoreContainer);
+  });
 }
 
 seeScoreList.addEventListener("click", viewHighScores);
