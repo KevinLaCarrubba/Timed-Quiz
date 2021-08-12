@@ -242,16 +242,22 @@ function clearStorage() {
 clearButton.addEventListener("click", clearStorage);
 
 function displayScore() {
+  //display high score
   displayHighScore.style.display = "block";
-  console.log(oldScore);
+  //loop through old score
   oldScore.forEach((item) => {
+    //create a div for the score line
     var scoreContainer = document.createElement("div");
+    //add a class list to the div
     scoreContainer.classList.add("scoreContainer");
+    //create a name li
     var nameLine = document.createElement("li");
-    console.log(item.name);
+    //add the text context from the object to the line
     nameLine.textContent =
       "Username:  " + item.name + "    Score:  " + item.score;
+    //append the line to the div
     scoreContainer.appendChild(nameLine);
+    //append the div to the listhighscore
     listHighScore.appendChild(scoreContainer);
   });
 }
@@ -266,13 +272,13 @@ function inputUserName() {
   }
   formDisplay.style.display = "none";
   seeScoreList.style.display = "none";
-  getStoredInfo();
+  pushNewInfo();
   return false;
 }
 
 submitButton.addEventListener("click", inputUserName);
 
-function getStoredInfo() {
+function pushNewInfo() {
   oldScore.push(newScore);
   localStorage.setItem("oldScore", JSON.stringify(oldScore));
   displayScore();
